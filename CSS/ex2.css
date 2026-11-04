@@ -1,4 +1,4 @@
-
+/* 引入可愛圓潤風格的字體 */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&display=swap');
 
 @media (hover: hover) and (pointer: fine) {
@@ -26,7 +26,6 @@ body {
     background: linear-gradient(135deg, #f5f5f5 25%, #dcdcdc 50%, #b0b0b0 75%, #ffffff 100%);
     background-attachment: fixed;
     color: #333333;
-
 }
 
 a {
@@ -106,6 +105,33 @@ nav a:hover {
     filter: grayscale(20%) contrast(1.1); 
 }
 
+/* =========================================
+   新增：大標題與小標題的漸入動畫
+========================================= */
+/* 定義從左向右漸入 */
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 定義從右向左漸入 */
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .hero h1 {
     position: absolute;
     top: 15%;
@@ -114,6 +140,10 @@ nav a:hover {
     color: #ffffff;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7);
     font-weight: 900;
+    
+    /* 【已修改】套用從左向右的漸入動畫，耗時 1 秒 */
+    opacity: 0; 
+    animation: fadeInLeft 1s ease-out forwards;
 }
 
 .hero p {
@@ -126,6 +156,22 @@ nav a:hover {
     padding: 15px 30px;
     border-radius: 20px;
     font-weight: 600;
+    
+    /* 【已修改】套用從右向左的漸入動畫，延遲 0.5 秒後執行，耗時 1 秒 */
+    opacity: 0;
+    animation: fadeInRight 1s ease-out 0.5s forwards;
+}
+
+/* =========================================
+   新增：區塊標題的左右晃動動畫
+========================================= */
+/* 定義鐘擺般的左右晃動 */
+@keyframes swing {
+    20% { transform: rotate3d(0, 0, 1, 15deg); }
+    40% { transform: rotate3d(0, 0, 1, -10deg); }
+    60% { transform: rotate3d(0, 0, 1, 5deg); }
+    80% { transform: rotate3d(0, 0, 1, -5deg); }
+    to { transform: rotate3d(0, 0, 1, 0deg); }
 }
 
 /* section */
@@ -143,6 +189,11 @@ section h1 {
     font-weight: 900;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
     margin-bottom: 40px;
+    
+    /* 【已修改】套用晃動動畫，並將基準點設在文字頂部，產生鐘擺效果 */
+    transform-origin: top center;
+    /* 動畫播放 2秒，無限次數循環。如果您只希望滑鼠經過才動，可移至 section h1:hover */
+    animation: swing 2s infinite ease-in-out; 
 }
 
 /* card */
@@ -154,7 +205,6 @@ section h1 {
     text-align: center;
     cursor: pointer;
     white-space: nowrap; /* 強制文字不換行 */
-    /* 字體大小縮放：最小 12px (0.75rem)，浮動值 1.2vw，最大約 16px (1rem) */
     font-size: clamp(0.75rem, 1.2vw, 1rem); 
     
     overflow: hidden;
@@ -164,11 +214,9 @@ section h1 {
 .card img {
     width: 80%;
     border-radius: 50%;
-    /* 虛線(dashed)實線(solid) */
     border: 6px solid #333333;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     
-    /* 移除原本的 transform 與 transition，改用動畫控制 */
     white-space: nowrap; 
     font-size: clamp(0.75rem, 1.2vw, 1rem); 
     overflow: hidden;
@@ -192,7 +240,6 @@ section h1 {
 
 /* 懸停時觸發震動動畫 */
 .card:hover img {
-    /* 執行動畫名稱 shake，時間 0.5秒，無限循環(可依喜好拿掉 infinite 改播放1次) */
     animation: shake 0.5s infinite; 
     
     white-space: nowrap; 
