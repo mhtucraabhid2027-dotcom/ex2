@@ -169,22 +169,35 @@ section h1 {
     border: 6px solid #333333;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     
-    transform: rotate(0deg);
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    white-space: nowrap; /* 強制文字不換行 */
-    /* 字體大小縮放：最小 12px (0.75rem)，浮動值 1.2vw，最大約 16px (1rem) */
+    /* 移除原本的 transform 與 transition，改用動畫控制 */
+    white-space: nowrap; 
     font-size: clamp(0.75rem, 1.2vw, 1rem); 
-    
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+/* 建立震動動畫關鍵影格 */
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* 懸停時觸發震動動畫 */
 .card:hover img {
-    transform: rotate(-15deg) scale(1.05); 
-    white-space: nowrap; /* 強制文字不換行 */
-    /* 字體大小縮放：最小 12px (0.75rem)，浮動值 1.2vw，最大約 16px (1rem) */
-    font-size: clamp(0.75rem, 1.2vw, 1rem); 
+    /* 執行動畫名稱 shake，時間 0.5秒，無限循環(可依喜好拿掉 infinite 改播放1次) */
+    animation: shake 0.5s infinite; 
     
+    white-space: nowrap; 
+    font-size: clamp(0.75rem, 1.2vw, 1rem); 
     overflow: hidden;
     text-overflow: ellipsis;
 }
