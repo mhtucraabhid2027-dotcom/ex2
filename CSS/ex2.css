@@ -1,6 +1,23 @@
 /* 引入可愛圓潤風格的字體 */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..900;1,400..900&display=swap');
 
+@media (hover: hover) and (pointer: fine) {
+    /* 設定全站預設游標 */
+    body {
+        cursor: url('mouse.png'), auto; 
+    }
+
+    /* 設定可點擊元素的懸停游標 */
+    a, .card, article {
+        cursor: url('mouse.png'), pointer; 
+    }
+
+    /* 確保 hover 時依然顯示自訂游標 */
+    a:hover, .card:hover, article:hover {
+        cursor: url('mouse.png'), pointer;
+    }
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -137,6 +154,12 @@ section h1 {
     padding: 15px;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap; /* 強制文字不換行 */
+    /* 字體大小縮放：最小 12px (0.75rem)，浮動值 1.2vw，最大約 16px (1rem) */
+    font-size: clamp(0.75rem, 1.2vw, 1rem); 
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card img {
@@ -148,6 +171,12 @@ section h1 {
     
     transform: rotate(0deg);
     transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    white-space: nowrap; /* 強制文字不換行 */
+    /* 字體大小縮放：最小 12px (0.75rem)，浮動值 1.2vw，最大約 16px (1rem) */
+    font-size: clamp(0.75rem, 1.2vw, 1rem); 
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card:hover img {
